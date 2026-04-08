@@ -54,7 +54,16 @@ const zhSidebar = [
     ],
   },
   {
-    text: 'Channel 系统',
+    text: 'IM 接入',
+    collapsed: false,
+    items: [
+      { text: '总览', link: '/im/' },
+      { text: 'Telegram', link: '/im/telegram' },
+      { text: '飞书', link: '/im/feishu' },
+    ],
+  },
+  {
+    text: 'Channel 源码研究',
     collapsed: false,
     items: [
       { text: '概览', link: '/channel/' },

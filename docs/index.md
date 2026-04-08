@@ -36,6 +36,10 @@ features:
     title: 第三方模型支持
     details: 接入 OpenAI、DeepSeek、Ollama 等任意兼容模型
     link: /guide/third-party-models
+  - icon: "\U0001F4AC"
+    title: IM 接入
+    details: 在桌面端 webapp 配置 Telegram / 飞书，并通过独立 adapter 进程远程对话 Claude Code
+    link: /im/
   - icon: "\U0001F4BB"
     title: Computer Use
     details: 桌面控制功能 — 截屏、鼠标、键盘操作（Python Bridge 实现）

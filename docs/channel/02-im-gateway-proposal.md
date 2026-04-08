@@ -1,8 +1,9 @@
-# IM Gateway 方案设计 `[已采纳 — 轻量脚本方案]`
+# IM Gateway 方案设计 `[历史设计稿]`
 
 > 像 OpenClaw 一样，让 Claude Code Desktop 快速接入任意 IM 平台
 >
-> **最终方案**：不使用 OpenClaw 框架，也不新增 Gateway 模块。每个 IM 平台一个 200-350 行的独立 Adapter 脚本，直连现有 `/ws/:sessionId` 接口，服务端零改动。详见 [`adapters/README.md`](../../adapters/README.md)。
+> 状态更新：当前实际可用的接入方式请看 [`docs/im/`](../im/)。
+> 本文保留为方案演进记录，不再作为接入说明。
 
 <p align="center">
 <a href="#一背景与动机">背景</a> ·

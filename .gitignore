@@ -25,10 +25,11 @@ desktop/src-tauri/gen/
 # Desktop brand asset candidates (keep only selected ones in public/)
 desktop/brand-assets/
 
-# Claude worktrees & auto-generated
-.claude/worktrees/
-.claude/scheduled_tasks.lock
-.claude/scheduled_tasks.json
+# Claude local config & auto-generated
+.claude/
+
+# Superpowers plans & specs (local only)
+docs/superpowers/
 
 # Debug / temp screenshots (root dir only)
 /*.png
