@@ -31,6 +31,8 @@ export const en = {
   'sidebar.timeGroup.last7days': 'Last 7 days',
   'sidebar.timeGroup.last30days': 'Last 30 days',
   'sidebar.timeGroup.older': 'Older',
+  'sidebar.collapse': 'Collapse sidebar',
+  'sidebar.expand': 'Expand sidebar',
 
   // ─── Title Bar ──────────────────────────────────────
   'titlebar.code': 'Code',

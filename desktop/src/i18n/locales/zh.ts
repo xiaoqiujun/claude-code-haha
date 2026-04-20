@@ -33,6 +33,8 @@ export const zh: Record<TranslationKey, string> = {
   'sidebar.timeGroup.last7days': '最近 7 天',
   'sidebar.timeGroup.last30days': '最近 30 天',
   'sidebar.timeGroup.older': '更早',
+  'sidebar.collapse': '折叠侧边栏',
+  'sidebar.expand': '展开侧边栏',
 
   // ─── Title Bar ──────────────────────────────────────
   'titlebar.code': '代码',

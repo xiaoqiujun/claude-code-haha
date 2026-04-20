@@ -146,8 +146,11 @@
 
   /* Layout dimensions */
   --sidebar-width: 280px;
+  --sidebar-rail-width: 72px;
   --titlebar-height: 40px;
   --statusbar-height: 36px;
+  --motion-sidebar-duration: 280ms;
+  --motion-sidebar-easing: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Surface aliases */
   --color-surface-sidebar: var(--color-surface-container-low);
@@ -422,6 +425,151 @@ button, input, textarea, select, a, [role="button"] {
 
 .glass-panel:focus-within {
   box-shadow: var(--shadow-focus-ring), var(--shadow-dropdown);
+}
+
+.sidebar-shell {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: width var(--motion-sidebar-duration) var(--motion-sidebar-easing);
+  will-change: width;
+}
+
+.sidebar-shell[data-state="closed"] {
+  width: var(--sidebar-rail-width);
+}
+
+.sidebar-panel {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  transition:
+    background-color var(--motion-sidebar-duration) var(--motion-sidebar-easing),
+    border-color var(--motion-sidebar-duration) var(--motion-sidebar-easing);
+}
+
+.sidebar-panel[data-state="closed"] {
+  width: var(--sidebar-rail-width);
+  min-width: var(--sidebar-rail-width);
+}
+
+.sidebar-toggle-button {
+  color: color-mix(in srgb, var(--color-text-secondary) 72%, transparent);
+  background: transparent;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+  border: 0;
+  box-shadow: none;
+}
+
+.sidebar-toggle-button:hover {
+  color: color-mix(in srgb, var(--color-text-primary) 88%, transparent);
+  background: color-mix(in srgb, var(--color-surface-hover) 34%, transparent);
+}
+
+.sidebar-toggle-button:active {
+  transform: translateY(0.5px);
+  background: color-mix(in srgb, var(--color-surface-hover) 54%, transparent);
+}
+
+.sidebar-toggle-button--open {
+  color: color-mix(in srgb, var(--color-text-secondary) 68%, transparent);
+}
+
+.sidebar-toggle-button--open:hover {
+  color: color-mix(in srgb, var(--color-text-primary) 82%, transparent);
+}
+
+.sidebar-toggle-button--collapsed {
+  color: color-mix(in srgb, var(--color-text-primary) 78%, transparent);
+}
+
+.sidebar-toggle-button--collapsed:hover {
+  color: var(--color-text-primary);
+}
+
+.sidebar-toggle-button--collapsed:active {
+}
+
+.sidebar-toggle-icon {
+  overflow: visible;
+}
+
+.sidebar-toggle-chevron {
+  stroke: currentColor;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+  vector-effect: non-scaling-stroke;
+}
+
+.sidebar-toggle-chevron {
+  opacity: 0.95;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.85;
+  transform-origin: 50% 50%;
+}
+
+.sidebar-toggle-icon--open .sidebar-toggle-chevron {
+  transform: translateX(-0.2px);
+}
+
+.sidebar-toggle-button--collapsed .sidebar-toggle-chevron {
+  stroke-width: 2;
+  transform: translateX(0.4px);
+}
+
+.sidebar-copy {
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    max-width var(--motion-sidebar-duration) var(--motion-sidebar-easing),
+    opacity calc(var(--motion-sidebar-duration) - 40ms) ease,
+    transform var(--motion-sidebar-duration) var(--motion-sidebar-easing);
+}
+
+.sidebar-copy--visible {
+  max-width: 240px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sidebar-copy--hidden {
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.sidebar-section {
+  overflow: hidden;
+  transition:
+    max-height var(--motion-sidebar-duration) var(--motion-sidebar-easing),
+    opacity calc(var(--motion-sidebar-duration) - 40ms) ease,
+    transform var(--motion-sidebar-duration) var(--motion-sidebar-easing);
+}
+
+.sidebar-section--visible {
+  max-height: 1200px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sidebar-section--hidden {
+  max-height: 0;
+  opacity: 0;
+  transform: translateX(-12px);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-shell,
+  .sidebar-panel,
+  .sidebar-copy,
+  .sidebar-section {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .markdown-prose .md-table-wrap table {

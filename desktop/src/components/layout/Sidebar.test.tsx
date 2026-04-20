@@ -25,6 +25,8 @@ vi.mock('../../i18n', () => ({
       'sidebar.timeGroup.last30days': 'Last 30 Days',
       'sidebar.timeGroup.older': 'Older',
       'sidebar.missingDir': 'Missing',
+      'sidebar.collapse': 'Collapse sidebar',
+      'sidebar.expand': 'Expand sidebar',
     }
 
     return translations[key] ?? key
@@ -70,6 +72,7 @@ describe('Sidebar', () => {
       disconnectSession,
     } as Partial<ReturnType<typeof useChatStore.getState>>)
     useUIStore.setState({
+      sidebarOpen: true,
       addToast,
     } as Partial<ReturnType<typeof useUIStore.getState>>)
   })
@@ -154,5 +157,26 @@ describe('Sidebar', () => {
 
     expect(useTabStore.getState().tabs).toEqual([])
     expect(useTabStore.getState().activeTabId).toBeNull()
+  })
+
+  it('collapses into an icon rail and expands back', async () => {
+    render(<Sidebar />)
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'Collapse sidebar' }))
+    })
+
+    expect(useUIStore.getState().sidebarOpen).toBe(false)
+    expect(screen.queryByPlaceholderText('Search sessions')).not.toBeInTheDocument()
+    expect(screen.getByRole('complementary')).toHaveAttribute('data-state', 'closed')
+    expect(screen.getByTestId('sidebar-expand-button')).toHaveClass('sidebar-toggle-button--collapsed')
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'Expand sidebar' }))
+    })
+
+    expect(useUIStore.getState().sidebarOpen).toBe(true)
+    expect(screen.getByPlaceholderText('Search sessions')).toBeInTheDocument()
+    expect(screen.getByRole('complementary')).toHaveAttribute('data-state', 'open')
   })
 })
